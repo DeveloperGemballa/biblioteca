@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Emprestimos;
+use App\Models\Emprestimo;
 use App\Models\Contato;
 use App\Models\Livros;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class EmprestimosController extends Controller
      */
     public function index()
     {
-        $emprestimos = Emprestimos::simplepaginate(5);
+        $emprestimos = Emprestimo::simplepaginate(5);
 
 
         return view('emprestimo.index',array('emprestimos' => $emprestimos,'busca'=>null));
@@ -30,7 +30,7 @@ class EmprestimosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function buscar(Request $request) {
-        $emprestimos = Emprestimos::where('contato_id','=',$request->input('busca'))->orwhere('livro_id','=',$request->input('busca'))->orwhere('obs','LIKE','%'.$request->input('busca').'%')->simplepaginate(5);
+        $emprestimos = Emprestimo::where('contato_id','=',$request->input('busca'))->orwhere('livro_id','=',$request->input('busca'))->orwhere('obs','LIKE','%'.$request->input('busca').'%')->simplepaginate(5);
         return view('emprestimo.index',array('emprestimos' => $emprestimos,'busca'=>$request->input('busca')));
     }
 
@@ -60,7 +60,7 @@ class EmprestimosController extends Controller
             'livro_id' => 'required',
             'datahora' => 'required'
         ]);
-        $emprestimo = new Emprestimos();
+        $emprestimo = new Emprestimo();
         $emprestimo->contato_id = $request->input('contato_id');
         $emprestimo->livro_id = $request->input('livro_id');
         $emprestimo->datahora = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $request->input('datahora'));
@@ -68,7 +68,7 @@ class EmprestimosController extends Controller
         $emprestimo->datadevolucao = null;
 
         if($emprestimo->save()) {
-            return redirect('emprestimos');
+            return redirect('emprestimo');
         }
     }
 
@@ -78,7 +78,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function show(Emprestimos $emprestimo)
+    public function show(Emprestimo $emprestimo)
     {
         //
     }
@@ -89,7 +89,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Emprestimos $emprestimo)
+    public function edit(Emprestimo $emprestimo)
     {
         //
     }
@@ -101,7 +101,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Emprestimos $emprestimo)
+    public function update(Request $request, Emprestimo $emprestimo)
     {
         //
     }
@@ -112,7 +112,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Emprestimos $emprestimo)
+    public function destroy(Emprestimo $emprestimo)
     {
         //
     }
