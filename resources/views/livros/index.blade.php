@@ -31,7 +31,7 @@
 {{Form::close()}}
     <ul>
         @foreach($livros as $livro)
-            <li><a href="{{url('livros/'.$livro->id)}}" class="btn"><mark>{!!$livros->TituloLivro!!}</mark></a></li>
+            <li><a href="{{url('livros/'.$livro->id)}}" class="btn"><mark>{{$livro->TituloLivro}}</mark></a></li>
         @endforeach
     </ul>
     <br>

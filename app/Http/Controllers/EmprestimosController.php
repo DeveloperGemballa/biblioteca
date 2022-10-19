@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Emprestimos;
+use App\Models\Contato;
+use App\Models\Livros;
 use Illuminate\Http\Request;
 use Session;
 
@@ -16,6 +18,8 @@ class EmprestimosController extends Controller
     public function index()
     {
         $emprestimos = Emprestimos::simplepaginate(5);
+
+
         return view('emprestimo.index',array('emprestimos' => $emprestimos,'busca'=>null));
 
     }
@@ -38,7 +42,9 @@ class EmprestimosController extends Controller
      */
     public function create()
     {
-        return view('emprestimo/create');
+        $contatos = Contato::all();
+        $livros = Livros::all();
+        return view('emprestimo.create',['contatos'=>$contatos,'livros'=>$livros]);
     }
 
     /**
@@ -62,7 +68,7 @@ class EmprestimosController extends Controller
         $emprestimo->datadevolucao = null;
 
         if($emprestimo->save()) {
-            return redirect('emprestimo');
+            return redirect('emprestimos');
         }
     }
 
