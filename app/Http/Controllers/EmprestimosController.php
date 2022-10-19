@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Emprestimo;
+use App\Models\Emprestimos;
 use Illuminate\Http\Request;
 use Session;
 
@@ -15,7 +15,7 @@ class EmprestimosController extends Controller
      */
     public function index()
     {
-        $emprestimos = Emprestimo::simplepaginate(5);
+        $emprestimos = Emprestimos::simplepaginate(5);
         return view('emprestimo.index',array('emprestimos' => $emprestimos,'busca'=>null));
 
     }
@@ -26,7 +26,7 @@ class EmprestimosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function buscar(Request $request) {
-        $emprestimos = Emprestimo::where('contato_id','=',$request->input('busca'))->orwhere('livro_id','=',$request->input('busca'))->orwhere('obs','LIKE','%'.$request->input('busca').'%')->simplepaginate(5);
+        $emprestimos = Emprestimos::where('contato_id','=',$request->input('busca'))->orwhere('livro_id','=',$request->input('busca'))->orwhere('obs','LIKE','%'.$request->input('busca').'%')->simplepaginate(5);
         return view('emprestimo.index',array('emprestimos' => $emprestimos,'busca'=>$request->input('busca')));
     }
 
@@ -38,7 +38,7 @@ class EmprestimosController extends Controller
      */
     public function create()
     {
-        return view('emprestimo.create');
+        return view('emprestimo/create');
     }
 
     /**
@@ -54,7 +54,7 @@ class EmprestimosController extends Controller
             'livro_id' => 'required',
             'datahora' => 'required'
         ]);
-        $emprestimo = new Emprestimo();
+        $emprestimo = new Emprestimos();
         $emprestimo->contato_id = $request->input('contato_id');
         $emprestimo->livro_id = $request->input('livro_id');
         $emprestimo->datahora = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $request->input('datahora'));
@@ -62,7 +62,7 @@ class EmprestimosController extends Controller
         $emprestimo->datadevolucao = null;
 
         if($emprestimo->save()) {
-            return redirect('emprestimos');
+            return redirect('emprestimo');
         }
     }
 
@@ -72,7 +72,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function show(Emprestimo $emprestimo)
+    public function show(Emprestimos $emprestimo)
     {
         //
     }
@@ -83,7 +83,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Emprestimo $emprestimo)
+    public function edit(Emprestimos $emprestimo)
     {
         //
     }
@@ -95,7 +95,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Emprestimo $emprestimo)
+    public function update(Request $request, Emprestimos $emprestimo)
     {
         //
     }
@@ -106,7 +106,7 @@ class EmprestimosController extends Controller
      * @param  \App\Models\Emprestimo  $emprestimo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Emprestimo $emprestimo)
+    public function destroy(Emprestimos $emprestimo)
     {
         //
     }

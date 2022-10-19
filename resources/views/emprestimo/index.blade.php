@@ -10,7 +10,7 @@
     {{Form::open(['url'=>'emprestimos/buscar','method'=>'GET'])}}
         <div class="row">
             <div class="col-sm-3">
-                <a class="btn btn-success" href="{{url('emprestimos/create')}}">Novo Empréstimo</a>
+                <a class="btn btn-success" href="{{url('emprestimo/create')}}">Novo Empréstimo</a>
             </div>
             <div class="col-sm-9">
                 <div class="input-group ml-5">
