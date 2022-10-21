@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Livros;
+use App\Models\Livro;
 use Session;
 
 class LivrosController extends Controller
@@ -15,7 +15,7 @@ class LivrosController extends Controller
      */
     public function index()
     {
-        $livros = Livros::paginate(13);
+        $livros = Livro::paginate(13);
 
         return view('livros.index',array('livros' => $livros));
     }
@@ -31,7 +31,7 @@ class LivrosController extends Controller
     }
 
     public function buscar(Request $request) {
-        $livros = Livros::where('TituloLivro','LIKE','%'.$request->input('busca').'%')->orwhere('AutorLivro','LIKE','%'.$request->input('busca').'%')->orwhere('EditoraLivro','LIKE','%'.$request->input('busca').'%')->orwhere('AnoLancamentoLivro','LIKE','%'.$request->input('busca').'%')->get();
+        $livros = Livro::where('TituloLivro','LIKE','%'.$request->input('busca').'%')->orwhere('AutorLivro','LIKE','%'.$request->input('busca').'%')->orwhere('EditoraLivro','LIKE','%'.$request->input('busca').'%')->orwhere('AnoLancamentoLivro','LIKE','%'.$request->input('busca').'%')->get();
         return view('livros.index',array('livros' => $livros,'busca'=>$request->input('busca')));
     }
     /**
@@ -42,7 +42,7 @@ class LivrosController extends Controller
      */
     public function store(Request $request)
     {
-        $livro = new Livros();
+        $livro = new Livro();
         $livro->TituloLivro = $request->input('titulo');
         $livro->DescricaoLivro = $request->input('descricao');
         $livro->AutorLivro = $request->input('autor');
@@ -62,7 +62,7 @@ class LivrosController extends Controller
      */
     public function show($id)
     {
-        $livros = Livros::find($id);
+        $livros = Livro::find($id);
         return view('livros.show',array('livros' => $livros));
     }
 
@@ -74,7 +74,7 @@ class LivrosController extends Controller
      */
     public function edit($id)
     {
-        $livros = Livros::find($id);
+        $livros = Livro::find($id);
         return view("livros.edit",array("livro"=>$livros));
     }
 
@@ -87,7 +87,7 @@ class LivrosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $livro = Livros::find($id);
+        $livro = Livro::find($id);
         $livro->TituloLivro = $request->input('titulo');
         $livro->DescricaoLivro = $request->input('descricao');
         $livro->AutorLivro = $request->input('autor');
@@ -107,7 +107,7 @@ class LivrosController extends Controller
      */
     public function destroy($id)
     {
-        $livro = Livros::find($id);
+        $livro = Livro::find($id);
         $livro -> delete();
         Session::flash("mensagem","Livro excluído com sucesso");
         return redirect(url("livros/"));

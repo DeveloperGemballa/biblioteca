@@ -13,11 +13,13 @@
 <body>
     <div class="container">
         <br>
+        <a href="{{url('/')}}" class="btn">HOME</a> |
         <a href="{{url('livros/create')}}" class="btn">Adicionar livro</a> |
-        <a href="{{url('/livros')}}" class="btn">Listar livros</a> |
-        <a href="{{url('/emprestimo')}}" class="btn">Empréstimos de livros</a>|
+        <a href="{{url('/livros')}}" class="btn">Listar livros</a> | ^-^  |
+        <a href="{{url('/emprestimos')}}" class="btn">Empréstimos de livros</a>| @_@  |
         <a href="{{url('contatos/create')}}" class="btn">Adicionar Contato</a> |
         <a href="{{url('/contatos')}}" class="btn">Listar contatos</a>
+        <br>
         <br>
         <br>
         <br>

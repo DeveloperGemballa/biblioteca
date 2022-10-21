@@ -22,7 +22,9 @@ Route::resource('/contatos',ContatosController::class);
 Route::get('livros/buscar',[LivrosController::class,'buscar']);
 Route::resource('/livros',LivrosController::class,);
 
-Route::resource('/emprestimo',EmprestimosController::class,);
+Route::get('emprestimos/buscar',[LivrosController::class,'buscar']);
+Route::put('emprestimos/{emprestimo}/devolver',[EmprestimosController::class,'devolver'])->name('emprestimos.devolver');
+Route::resource('/emprestimos',EmprestimosController::class,);
 
 Route::get('/testes', function () {
     return view('welcome');

@@ -5,6 +5,10 @@
     <div class="row container">
         <div class="col-sm-9">
             <div class="input-group ml-5">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 @if(isset($_GET['busca']))
                     @if($_GET['busca'] !== null)
                     <span class="input-group-btn">
@@ -21,7 +25,6 @@
             </div>
         </div>
     </div>
-    <hr>
 {{Form::close()}}
     <h1 align="center" class="display-2">Listagem de Contatos</h1>
     <br>

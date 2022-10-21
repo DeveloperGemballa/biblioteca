@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.layout')
 @section('title','Realizar Emprestimo')
 @section('content')
     <h1>Realizar Empréstimo</h1>
@@ -27,7 +27,7 @@
         {{Form::text('livro_id','',['class'=>'form-control','required','placeholder'=>'Selecione um Livro','list'=>'listlivros'])}}
         <datalist id="listlivros">
             @foreach($livros as $livro)
-                <option value="{{$livro->id}}">{{$livro->titulo}}</option>
+                <option value="{{$livro->id}}">{{$livro->TituloLivro}}</option>
             @endforeach
         </datalist>
 
