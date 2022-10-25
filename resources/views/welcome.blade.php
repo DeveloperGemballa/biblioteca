@@ -52,12 +52,12 @@
 <body>
   <div class="container">
     <div class="header">
-        <a href="{{url('/')}}" class="btn btn-light">HOME</a> 
-        <a href="{{url('livros/create')}}" class="btn btn-light">Adicionar livro</a> 
-        <a href="{{url('/livros')}}" class="btn btn-light">Listar livros</a> 
-        <a href="{{url('/emprestimos')}}" class="btn btn-light">Empréstimos de livros</a>  
-        <a href="{{url('contatos/create')}}" class="btn btn-light">Adicionar Contato</a> 
-        <a href="{{url('/contatos')}}" class="btn btn-light">Listar contatos</a>
+        <a href="{{url('/')}}" class="btn">HOME</a> 
+        <a href="{{url('livros/create')}}" class="btn">Adicionar livro</a> 
+        <a href="{{url('/livros')}}" class="btn">Listar livros</a> 
+        <a href="{{url('/emprestimos')}}" class="btn">Empréstimos de livros</a>  
+        <a href="{{url('contatos/create')}}" class="btn">Adicionar Contato</a> 
+        <a href="{{url('/contatos')}}" class="btn">Listar contatos</a>
     </div>
     <div class="content">
         <div class="buscar">@yield('campobuscar') </div>

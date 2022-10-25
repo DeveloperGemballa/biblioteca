@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Emprestimo;
 use App\Models\Contato;
 use App\Models\Livro;
@@ -46,9 +48,13 @@ class EmprestimosController extends Controller
      */
     public function create()
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $contatos = Contato::all();
         $livros = Livro::all();
         return view('emprestimo.create',['contatos'=>$contatos,'livros'=>$livros]);
+    } else {
+        return redirect('login');
+    }
     }
 
     /**
@@ -59,6 +65,7 @@ class EmprestimosController extends Controller
      */
     public function store(Request $request)
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $this->validate($request,[
             'contato_id' => 'required',
             'livro_id' => 'required',
@@ -74,6 +81,9 @@ class EmprestimosController extends Controller
         if($emprestimo->save()) {
             return redirect('emprestimos');
         }
+    } else {
+        return redirect('login');
+    }
     }
 
     /**
@@ -90,6 +100,7 @@ class EmprestimosController extends Controller
 
     public function devolver(Request $request, $id)
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $emprestimo = Emprestimo::find($id);
         $emprestimo->datadevolucao = \Carbon\Carbon::now();
         $emprestimo->save();
@@ -98,6 +109,9 @@ class EmprestimosController extends Controller
             Session::flash('mensagem','Empréstimo Devolvido');
             return redirect('emprestimos');
         }
+    } else {
+        return redirect('login');
+    }
     }
 
     /**
@@ -131,10 +145,14 @@ class EmprestimosController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $emprestimo = Emprestimo::find($id);
 
         $emprestimo->delete();
         Session::flash('mensagem','Empréstimo Excluído com Sucesso');
         return redirect(url('emprestimos/'));
+    } else {
+        return redirect('login');
+    }
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Livro;
 use Session;
@@ -27,7 +29,11 @@ class LivrosController extends Controller
      */
     public function create()
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         return view('livros.create');
+    } else {
+        return redirect('login');
+    }
     }
 
     public function buscar(Request $request) {
@@ -42,6 +48,7 @@ class LivrosController extends Controller
      */
     public function store(Request $request)
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $livro = new Livro();
         $livro->TituloLivro = $request->input('titulo');
         $livro->DescricaoLivro = $request->input('descricao');
@@ -52,6 +59,9 @@ class LivrosController extends Controller
         {
             return redirect('livros');
         }
+    } else {
+        return redirect('login');
+    }
     }
 
     /**
@@ -74,8 +84,12 @@ class LivrosController extends Controller
      */
     public function edit($id)
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $livros = Livro::find($id);
         return view("livros.edit",array("livro"=>$livros));
+    } else {
+        return redirect('login');
+    }
     }
 
     /**
@@ -87,6 +101,7 @@ class LivrosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $livro = Livro::find($id);
         $livro->TituloLivro = $request->input('titulo');
         $livro->DescricaoLivro = $request->input('descricao');
@@ -97,6 +112,9 @@ class LivrosController extends Controller
             Session::flash('mensagem','Livro alterado com sucesso');
             return redirect()->back();
         }
+    } else {
+        return redirect('login');
+    }
     }
 
     /**
@@ -107,9 +125,13 @@ class LivrosController extends Controller
      */
     public function destroy($id)
     {
+        if ((Auth::check()) && (Auth::user()->isAdmin())) {
         $livro = Livro::find($id);
         $livro -> delete();
         Session::flash("mensagem","Livro excluído com sucesso");
         return redirect(url("livros/"));
+    } else {
+        return redirect('login');
+    }
     }
 }
