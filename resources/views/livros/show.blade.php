@@ -12,10 +12,12 @@
             <li><mark>Editora:</mark> {{$livros->EditoraLivro}}</li>&nbsp;
             <li><mark>Ano de lançamento:</mark> {{$livros->AnoLancamentoLivro}}</li><br>
         </ul>
+        @if((Auth::check()) && (Auth::user()->isAdmin()))
         {!! Form::open(["route" => ['livros.destroy', $livros->id], 'method' => "DELETE"]) !!}
         {!! Form::submit('Excluir',['class'=>'btn btn-danger shadow']) !!} |
         <a href="{{url('livros/'.$livros->id.'/edit')}}" class="btn btn-warning shadow">Alterar</a> |
         <a href="{{url('livros')}}" class="btn btn-info shadow">Voltar</a>
         {!! Form::close() !!}
+        @endif
     </div>
 @endsection

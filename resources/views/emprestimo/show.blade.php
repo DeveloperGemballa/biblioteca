@@ -11,7 +11,8 @@
                 <div class="alert alert-info">
                     {{Session::get('mensagem')}}
                 </div>
-            @endif
+            @endif  
+            @auth
                         @if($emprestimo->datadevolucao == null)
                             {{Form::open(['route'=>['emprestimos.devolver',$emprestimo->id],'method'=>'PUT'])}}
                             {{form::submit('Devolver',['class'=>'btn btn-success','onclick'=>'return confim("Confirma devolução?")'])}}
@@ -20,6 +21,7 @@
                         @if($emprestimo->datadevolucao != null)
                             <strong> <mark class="bg-success">DEVOLVIDO {!! $emprestimo->devolvido !!}</mark> </strong>
                         @endif
+                        @endauth
             </div>
             <br>
             <h3 class="card-title">ID: {{$emprestimo->id}}</h3>
@@ -32,11 +34,13 @@
 
             <p class="text">obs: {{$emprestimo->obs}}</p>
         </div>
+        @if((Auth::check()) && (Auth::user()->isAdmin()))
         <div class="card-footer">
             {{Form::open(['route' => ['emprestimos.destroy',$emprestimo->id],'method' => 'DELETE'])}}
             {{Form::submit('Excluir',['class'=>'btn btn-danger','onclick'=>'return confirm("Confirma exclusão?")'])}}
             <a href="{{url('emprestimos/')}}" class="btn btn-secondary">Voltar</a>
             {{Form::close()}}
         </div>
+        @endif
     </div>
 @endsection

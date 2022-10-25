@@ -12,10 +12,12 @@
             <li><mark>cidade:</mark> {{$contato->cidade}}</li>
             <li><mark>estado:</mark> {{$contato->estado}}</li><br>
         </ul>
+        @if((Auth::check()) && (Auth::user()->isAdmin()))
         {!! Form::open(["route" => ['contatos.destroy', $contato->id], 'method' => "DELETE"]) !!}
         <a href="{{url('contatos/'.$contato->id.'/edit')}}" class="btn btn-warning shadow">Alterar</a> |
         {!! Form::submit('Excluir',['class'=>'btn btn-danger shadow']) !!} |
         <a href="{{url('contatos')}}" class="btn btn-info shadow">Voltar</a>
         {!! Form::close() !!}
+        @endif
     </div>
 @endsection

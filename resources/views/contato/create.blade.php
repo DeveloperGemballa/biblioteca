@@ -2,19 +2,20 @@
 @extends('layout.layout')
 @section('title','Criar novo Contato')
 @section('content')
+@auth
 <div class="shadow alert">
-
+    
     <h1 class="display-4">Criar novo Cadastro: </h1>
     @if(count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>
-                        {{$error}}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>
+                {{$error}}
+            </li>
+            @endforeach
+        </ul>
+    </div>
     @endif
     {!! Form::open(['route' => 'contatos.store', 'method' => 'POST']) !!}
     {!! Form::label('nome', 'Nome') !!}
@@ -36,4 +37,5 @@
     {!!Form::button('Cancelar',['onclick'=>'javascript:history.go(-1)', 'class'=>'btn btn-secondary shadow'])!!}
     {!! Form::close() !!}
 </div>
+@endauth
 @endsection

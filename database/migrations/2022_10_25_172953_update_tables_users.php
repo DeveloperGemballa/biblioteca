@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('emprestimos', function (Blueprint $table) {
-            $table->text('obs')->nullable()->default(null)->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('admin')->default(false);
         });
     }
 
@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('admin');
+        });
     }
 };

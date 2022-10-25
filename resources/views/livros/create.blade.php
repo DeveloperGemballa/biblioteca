@@ -2,19 +2,20 @@
 @extends('layout.layout')
 @section('title','Criar novo livro')
 @section('content')
+@if((Auth::check()) && (Auth::user()->isAdmin()))
 <div class="shadow alert">
-
+    
     <h1 class="display-4">Criar novo Cadastro de livro: </h1>
     @if(count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>
-                        {{$error}}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>
+                {{$error}}
+            </li>
+            @endforeach
+        </ul>
+    </div>
     @endif
     {!! Form::open(['route' => 'livros.store', 'method' => 'POST']) !!}
     {!! Form::label('titulo', 'Titulo do livro') !!}
@@ -36,4 +37,5 @@
     {!!Form::button('Cancelar',['onclick'=>'javascript:history.go(-1)', 'class'=>'btn btn-danger shadow'])!!}
     {!! Form::close() !!}
 </div>
+@endif
 @endsection
