@@ -27,7 +27,7 @@ class Emprestimo extends Model
         $prazodevolucao = \Carbon\Carbon::create($this->datahora)->addDays(PRAZO_EMPRESTIMO);
         //$prazo = $hoje->addDays(PRAZO_EMPRESTIMO);
         $atrasado = $prazodevolucao < \Carbon\Carbon::now()?"<mark class='bg-danger'> ATRASADO! </mark>":"";
-        $devolvido = $this->datadevolucao == null?"Previsto: ".$prazodevolucao->format('d/m/Y').$atrasado:\Carbon\Carbon::create($this->datadevolucao)->format('d/m/Y H:i:s');
+        $devolvido = $this->datadevolucao == null?"Prazo de devolução: ".$prazodevolucao->format('d/m/Y').$atrasado:\Carbon\Carbon::create($this->datadevolucao)->format('d/m/Y H:i:s');
         return $devolvido;
 
     }

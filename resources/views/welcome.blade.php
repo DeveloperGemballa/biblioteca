@@ -40,7 +40,7 @@
       
       position: absolute;
       width: 80%;
-      height: 100px;
+      height: 80vh;
       top: 80px;
       left: 120px;
 
@@ -60,7 +60,64 @@
         <a href="{{url('/contatos')}}" class="btn">Listar contatos</a>
     </div>
     <div class="content">
-        <div class="buscar">@yield('campobuscar') </div>
+        <div class="buscar">
+        <div class="row justify-content-center" style="margin:50px;">
+        <div class="col-md-11 text-light">
+            <div class="row text-center h5">
+                <div class="col m-3 bg-success text-black">
+                    <div class="card-header p-2">Livros</div>
+                    <div class="card-body h3 p-5">
+                        {{$numLivros}}
+                    </div>
+                </div>
+                <div class="col m-3 bg-primary text-black">
+                    <div class="card-header p-2">Contatos</div>
+                    <div class="card-body h3 p-5">
+                        {{$numContatos}}
+                    </div>
+                </div>
+                <div class="col m-3 bg-warning text-black">
+                    <div class="card-header p-2">Empréstimos</div>
+                    <div class="card-body h3 p-5">
+                        {{$numEmprestimos}}
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col m-3 text-black">
+                    <div class="card-header p-2 h5">Empréstimos a devolver</div>
+                    <div class="card-body ">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Id</th>
+                                <th>Contato</th>
+                                <th>Livro</th>
+                                <th>Data</th>
+                                <th>Devolução</th>
+                            </tr>
+                            @foreach ($emprestimosadevolver as $emprestimo)
+                            <tr>
+                                <td>
+                                    <a href="emprestimos/{{$emprestimo->id}}" class="btn btn-primary">{{$emprestimo->id}}</a>
+                                </td>
+                                <td>
+                                    {{$emprestimo->contato_id}} - {{$emprestimo->contato->nome}}
+                                </td>
+                                <td>
+                                    {{$emprestimo->livro_id}} - {{$emprestimo->livro->TituloLivro}}
+                                </td>
+                                <td>
+                                    {{\Carbon\Carbon::create($emprestimo->datahora)->format('d/m/Y H:i:s')}}
+                                </td>
+                                <td>{!!$emprestimo->devolvido!!}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+        </div>
           @yield('content')
     </div>
   </div>

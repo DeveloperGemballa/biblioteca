@@ -28,13 +28,7 @@ Route::get('emprestimos/buscar',[LivrosController::class,'buscar']);
 Route::put('emprestimos/{emprestimo}/devolver',[EmprestimosController::class,'devolver'])->name('emprestimos.devolver');
 Route::resource('/emprestimos',EmprestimosController::class,);
 
-Route::get('/testes', function () {
-    return view('welcome');
-});
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
