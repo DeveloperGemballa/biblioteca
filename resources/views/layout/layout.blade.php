@@ -39,10 +39,20 @@
         @yield('content')
     </div>
     <div id="app" class="container">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                @guest
+                            @if (Route::has('login'))
+                                {{ config('Bem-vindo(a)', "Faça login ou cadastre-se!" ) }}
+                            @endif
+
+                            @if (Route::has('register'))
+                                {{ config('Bem-vindo(a)', "Faça login ou cadastre-se!" ) }}
+                            @endif
+                        @else
+                            {{ config('Logado', "User: ".Auth::user()->name ) }}   
+                        @endguest
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -70,21 +80,14 @@
                                 </li>
                             @endif
                         @else
-                                <h6 class="display-6" style="font-size:25px;">
-                                    {{ Auth::user()->name }} ->
                                     <a class="btn" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-    
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                    </form>
-                                </h6>
-                                
-
-                                
+                                    </form> 
                         @endguest
                     </ul>
                 </div>
@@ -92,5 +95,6 @@
         </nav>
 
     </div>
+  </div>
 </body>
 </html>

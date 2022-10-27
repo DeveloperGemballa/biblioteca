@@ -48,6 +48,7 @@
       border-radius: 10px;
     }
   </style>
+  <title>Bem-vindo(a)</title>
 </head>
 <body>
   <div class="container">
@@ -61,25 +62,27 @@
     </div>
     <div class="content">
         <div class="buscar">
-        <div class="row justify-content-center" style="margin:50px;">
+        <div class="row justify-content-center" >
+        <h6 class="display-6" align="center">BOLSONARO</h6>
         <div class="col-md-11 text-light">
             <div class="row text-center h5">
                 <div class="col m-3 bg-success text-black">
                     <div class="card-header p-2">Livros</div>
                     <div class="card-body h3 p-5">
-                        {{$numLivros}}
+                        <a href="/livros" class="btn btn-dark">{{$numLivros}}</a>
                     </div>
                 </div>
                 <div class="col m-3 bg-primary text-black">
                     <div class="card-header p-2">Contatos</div>
                     <div class="card-body h3 p-5">
-                        {{$numContatos}}
+                    <a href="/contatos" class="btn btn-dark">{{$numContatos}}</a>
+                        
                     </div>
                 </div>
                 <div class="col m-3 bg-warning text-black">
                     <div class="card-header p-2">Empréstimos</div>
                     <div class="card-body h3 p-5">
-                        {{$numEmprestimos}}
+                    <a href="/emprestimos" class="btn btn-dark">{{$numEmprestimos}}</a>
                     </div>
                 </div>
             </div>
@@ -119,6 +122,63 @@
     </div>
         </div>
           @yield('content')
+    </div>
+    <div id="app" class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                @guest
+                            @if (Route::has('login'))
+                                {{ config('Bem-vindo(a)', "Faça login ou cadastre-se!" ) }}
+                            @endif
+
+                            @if (Route::has('register'))
+                                {{ config('Bem-vindo(a)', "Faça login ou cadastre-se!" ) }}
+                            @endif
+                        @else
+                            {{ config('Bem-vindo(a)', "Bem-vindo(a) ".Auth::user()->name ) }}   
+                        @endguest
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                                    <a class="btn" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form> 
+                        @endguest
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
     </div>
   </div>
 </body>

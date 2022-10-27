@@ -38,9 +38,10 @@
         <div class="card-footer">
             {{Form::open(['route' => ['emprestimos.destroy',$emprestimo->id],'method' => 'DELETE'])}}
             {{Form::submit('Excluir',['class'=>'btn btn-danger','onclick'=>'return confirm("Confirma exclusão?")'])}}
-            <a href="{{url('emprestimos/')}}" class="btn btn-secondary">Voltar</a>
+            
             {{Form::close()}}
+            @endif
+            <a href="{{url('emprestimos/')}}" class="btn btn-secondary">Voltar</a>
         </div>
-        @endif
     </div>
 @endsection
